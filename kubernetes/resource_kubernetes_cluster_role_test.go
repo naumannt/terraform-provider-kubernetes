@@ -112,40 +112,47 @@ func testAccCheckKubernetesClusterRoleExists(n string, obj *api.ClusterRole) res
 func testAccKubernetesClusterRoleConfig_basic(name string) string {
 	return fmt.Sprintf(`
 resource "kubernetes_cluster_role" "test" {
-	metadata {
-		labels {
-			TestLabelOne = "one"
-			TestLabelTwo = "two"
-			TestLabelThree = "three"
-		}
-		name = "%s"
-	}
-	rule {
-		api_groups = [""]
-		resources  = ["pods", "pods/log"]
-		verbs = ["get", "list"]
-	}
-}`, name)
+  metadata {
+    labels {
+      TestLabelOne   = "one"
+      TestLabelTwo   = "two"
+      TestLabelThree = "three"
+    }
+
+    name = "%s"
+  }
+  
+  rule {
+    api_groups = [""]
+    resources  = ["pods", "pods/log"]
+    verbs      = ["get", "list"]
+  }
+}
+`, name)
 }
 func testAccKubernetesClusterRoleConfig_modified(name string) string {
 	return fmt.Sprintf(`
 resource "kubernetes_cluster_role" "test" {
-	metadata {
-		labels {
-			TestLabelOne = "one"
-			TestLabelThree = "three"
-		}
-		name = "%s"
-	}
-	rule {
-		api_groups = [""]
-		resources  = ["pods", "pods/log"]
-		verbs      = ["get", "list", "watch"]
-	}
-	rule {
-		api_groups = [""]
-		resources  = ["deployments"]
-		verbs      = ["get", "list"]
-	}
-}`, name)
+  metadata {
+    labels {
+      TestLabelOne   = "one"
+      TestLabelThree = "three"
+    }
+
+    name = "%s"
+  }
+
+  rule {
+    api_groups = [""]
+    resources  = ["pods", "pods/log"]
+    verbs      = ["get", "list", "watch"]
+  }
+
+  rule {
+    api_groups = [""]
+    resources  = ["deployments"]
+    verbs      = ["get", "list"]
+  }
+}
+`, name)
 }
