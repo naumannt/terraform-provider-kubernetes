@@ -73,11 +73,11 @@ func expandDaemonSetSpec(daemonset []interface{}) (appsv1.DaemonSetSpec, error) 
 		obj.UpdateStrategy = expandDaemonSetStrategy(v)
 	}
 
-	template, err := expandPodTemplate(in["template"].([]interface{}))
-	if err != nil {
-		return obj, err
-	}
-	obj.Template = template
+	//template, err := expandPodTemplate(in["template"].([]interface{}))
+	//if err != nil {
+	//	return obj, err
+	//}
+	//obj.Template = template
 
 	return obj, nil
 }
